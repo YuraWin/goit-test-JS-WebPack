@@ -61,21 +61,39 @@ import './styles.css';
 // }
 
 // **module 11   3***********************************************************************
-const PROMPT_DELAY = 1000;
+import BSN from 'bootstrap.native';
+
+const refs = {
+    modal: document.querySelector('#subscription-modal')
+};
+
+const modal = new BSN.Modal('#subscription-modal');
+console.log(modal);
+
+refs.modal.addEventListener('hide.bs.modal', () => {
+    console.log("закрыли окно");
+})
+
+const PROMPT_DELAY = 3000;
 const MAX_PROMPT_ATTEMPTS = 3;
-let intervalId = null;
 
-let promptCounter = 0;
-let hasSubcribed = false;
+setTimeout(() => {
+    console.log('Открываем модалку');
+modal.show();
+},PROMPT_DELAY)
+// let intervalId = null;
 
-intervalId = setInterval(() => {
-    if (promptCounter === MAX_PROMPT_ATTEMPTS || hasSubcribed) {
-        console.log('Останавливаем интервал');
-        clearInterval(intervalId);
-        return;
-    }
+// let promptCounter = 0;
+// let hasSubcribed = false;
 
-    console.log('Подпишись на рассылку', Date.now());
-    promptCounter += 1;
-}, PROMPT_DELAY);
+// intervalId = setInterval(() => {
+//     if (promptCounter === MAX_PROMPT_ATTEMPTS || hasSubcribed) {
+//         console.log('Останавливаем интервал');
+//         clearInterval(intervalId);
+//         return;
+//     }
+
+//     console.log('Подпишись на рассылку', Date.now());
+//     promptCounter += 1;
+// }, PROMPT_DELAY);
 // ***********************************************************************
