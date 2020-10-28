@@ -63,28 +63,44 @@ import './styles.css';
 // **module 11   3***********************************************************************
 import BSN from 'bootstrap.native';
 
+const PROMPT_DELAY = 1000;
+const MAX_PROMPT_ATTEMPTS = 3;
+let promptCounter = 0;
+let hasSubcribed = false;
+let timeoutId = null;
+
 const refs = {
-    modal: document.querySelector('#subscription-modal')
+    modal: document.querySelector('#subscription-modal'),
+    subscribeBtn: document.querySelector('button[data-subscribe]'),
 };
 
 const modal = new BSN.Modal('#subscription-modal');
-console.log(modal);
+// console.log(modal);
 
-refs.modal.addEventListener('hide.bs.modal', () => {
-    console.log("закрыли окно");
+refs.modal.addEventListener('hide.bs.modal', openModal())
+
+refs.subscribeBtn.addEventListener('click', () => { 
+
+    hasSubcribed = true;
+    modal.hide();
+    // clearTimeout(timeoutId);
 })
 
-const PROMPT_DELAY = 3000;
-const MAX_PROMPT_ATTEMPTS = 3;
+// openModal();
 
-setTimeout(() => {
-    console.log('Открываем модалку');
-modal.show();
-},PROMPT_DELAY)
+function openModal() {
+    if (promptCounter === MAX_PROMPT_ATTEMPTS || hasSubcribed) return;
+
+    timeoutId=setTimeout(() => {
+        console.log('Открываем модалку');
+        modal.show();
+        promptCounter += 1;
+        console.log('Opencounter', promptCounter);
+    }, PROMPT_DELAY)
+};
+
 // let intervalId = null;
 
-// let promptCounter = 0;
-// let hasSubcribed = false;
 
 // intervalId = setInterval(() => {
 //     if (promptCounter === MAX_PROMPT_ATTEMPTS || hasSubcribed) {
