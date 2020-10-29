@@ -77,19 +77,22 @@ const refs = {
 const modal = new BSN.Modal('#subscription-modal');
 // console.log(modal);
 
-refs.modal.addEventListener('hide.bs.modal', openModal())
+refs.modal.addEventListener('hide.bs.modal', openModal)
 
 refs.subscribeBtn.addEventListener('click', () => { 
 
     hasSubcribed = true;
     modal.hide();
-    // clearTimeout(timeoutId);
+   
 })
 
-// openModal();
+openModal();
 
 function openModal() {
-    if (promptCounter === MAX_PROMPT_ATTEMPTS || hasSubcribed) return;
+    if (promptCounter === MAX_PROMPT_ATTEMPTS || hasSubcribed) {
+        console.log(`Достигнуто максимальное число открываний ${MAX_PROMPT_ATTEMPTS} или подписался`);
+        return
+    };
 
     timeoutId=setTimeout(() => {
         console.log('Открываем модалку');
