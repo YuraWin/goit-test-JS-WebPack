@@ -61,58 +61,104 @@ import './styles.css';
 // }
 
 // **module 11   3***********************************************************************
-import BSN from 'bootstrap.native';
+// import BSN from 'bootstrap.native';
 
-const PROMPT_DELAY = 1000;
-const MAX_PROMPT_ATTEMPTS = 3;
-let promptCounter = 0;
-let hasSubcribed = false;
-let timeoutId = null;
-
-const refs = {
-    modal: document.querySelector('#subscription-modal'),
-    subscribeBtn: document.querySelector('button[data-subscribe]'),
-};
-
-const modal = new BSN.Modal('#subscription-modal');
-// console.log(modal);
-
-refs.modal.addEventListener('hide.bs.modal', openModal)
-
-refs.subscribeBtn.addEventListener('click', () => { 
-
-    hasSubcribed = true;
-    modal.hide();
-   
-})
-
-openModal();
-
-function openModal() {
-    if (promptCounter === MAX_PROMPT_ATTEMPTS || hasSubcribed) {
-        console.log(`Достигнуто максимальное число открываний ${MAX_PROMPT_ATTEMPTS} или подписался`);
-        return
-    };
-
-    timeoutId=setTimeout(() => {
-        console.log('Открываем модалку');
-        modal.show();
-        promptCounter += 1;
-        console.log('Opencounter', promptCounter);
-    }, PROMPT_DELAY)
-};
-
-// let intervalId = null;
+// const PROMPT_DELAY = 1000;
+// const MAX_PROMPT_ATTEMPTS = 3;
+// let promptCounter = 0;
+// let hasSubcribed = false;
 
 
-// intervalId = setInterval(() => {
+// const refs = {
+//     modal: document.querySelector('#subscription-modal'),
+//     subscribeBtn: document.querySelector('button[data-subscribe]'),
+// };
+
+// const modal = new BSN.Modal('#subscription-modal');
+
+// refs.modal.addEventListener('hide.bs.modal', openModal)
+
+// refs.subscribeBtn.addEventListener('click', () => {
+
+//     hasSubcribed = true;
+//     modal.hide();
+
+// })
+
+// openModal();
+
+// function openModal() {
 //     if (promptCounter === MAX_PROMPT_ATTEMPTS || hasSubcribed) {
-//         console.log('Останавливаем интервал');
-//         clearInterval(intervalId);
-//         return;
-//     }
+//         console.log(`Достигнуто максимальное число открываний ${MAX_PROMPT_ATTEMPTS} или подписался`);
+//         return
+//     };
 
-//     console.log('Подпишись на рассылку', Date.now());
-//     promptCounter += 1;
-// }, PROMPT_DELAY);
+//     setTimeout(() => {
+//         console.log('Открываем модалку');
+//         modal.show();
+//         promptCounter += 1;
+//         console.log('Opencounter', promptCounter);
+//     }, PROMPT_DELAY)
+// };
+
+// **module 11 4*********************************************************************
+// const date1 = Date.now();
+
+
+// setTimeout(() => {
+//     const date2 = Date.now();
+
+//     console.log(date1);
+//     console.log(date2);
+//     console.log(date2 - date1);
+// }, 3000);
+
+// **module 11  5 timer*********************************************************************
+
+const timer = {
+    start() {
+        const startTime = Date.now();
+
+        setInterval(() => {
+            const currentTime = Date.now();
+            // console.log('start -> currentTime', currentTime)
+
+            console.log(currentTime - startTime)
+        }, 1000)
+    },
+
+}
+
+
+timer.start();
+
+
+
+
+
+
+function updateClockFace({ hours, min, secs }) {
+    requestAnimationFrame.clockFace.TextContent = `${hours}:${min}:${secs}`;
+}
+
+function pad(value) {
+    return String(value).padStart(2, '0');
+}
+
+
+
+function getTimeComponents(time) {
+    const hours = pad(
+        Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    );
+    const mins = pad(
+        Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)),
+    );
+
+    const secs = pad(
+        Math.floor((time % (1000 * 60)) / (1000)),
+    );
+    return { hours, min, secs };
+}
+// ***********************************************************************
 // ***********************************************************************
