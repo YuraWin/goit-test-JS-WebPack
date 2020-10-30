@@ -114,51 +114,57 @@ import './styles.css';
 // }, 3000);
 
 // **module 11  5 timer*********************************************************************
+const refs = {
+    startBtn: document.querySelector('button[data-action-start]'),
+    stopBtn: document.querySelector('button[data-action-stop]'),
+clockface: document.querySelector('js-clockface')
+}
 
 const timer = {
+    intervalId : null,
+
     start() {
         const startTime = Date.now();
 
-        setInterval(() => {
+        this.intervalId = setInterval(() => {
             const currentTime = Date.now();
-            // console.log('start -> currentTime', currentTime)
-
-            console.log(currentTime - startTime)
+            const deltaTime = currentTime - startTime;
+            const {hours,mins,secs} = getTimeComponents(deltaTime);
+            console.log(`${hours}:${mins}:${secs}`);
         }, 1000)
     },
 
+    stop() {
+        clearInterval(this.intervalId)
+    }
+
 }
 
+refs.startBtn.addEventListener('click', () => {
+    timer.start();
+});
+refs.stopBtn.addEventListener('click', () => {
+    timer.stop();
+});
 
-timer.start();
 
 
-
-
-
-
-function updateClockFace({ hours, min, secs }) {
-    requestAnimationFrame.clockFace.TextContent = `${hours}:${min}:${secs}`;
+function updateClockFace({ hours, mins, secs }) {
+    requestAnimationFrame.clockFace.TextContent = `${hours}:${mins}:${secs}`;
 }
 
 function pad(value) {
     return String(value).padStart(2, '0');
 }
 
-
-
 function getTimeComponents(time) {
-    const hours = pad(
-        Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-    );
-    const mins = pad(
-        Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)),
-    );
-
-    const secs = pad(
-        Math.floor((time % (1000 * 60)) / (1000)),
-    );
-    return { hours, min, secs };
+    const hours = pad(Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))        ;
+    const mins = pad(Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)))        ;
+    const secs = pad(Math.floor((time % (1000 * 60)) / (1000)))        ;
+    return { hours, mins, secs };
 }
-// ***********************************************************************
+// *module 11 6 clock-timer**********************************************************************
+
+
+
 // ***********************************************************************
