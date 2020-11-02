@@ -186,6 +186,20 @@ import './styles.css';
 
 // *module 11 7 promise**********************************************************************
 
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        // resolve('There was success :)  ');
+        reject('There was an error :(  ');
+    }, 2000);
+})
 
+promise
+    .then(data => {
+        console.log(data)
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    .finally(()=>console.log('The END.'));
 
 // ***********************************************************************
