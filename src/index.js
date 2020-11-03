@@ -186,20 +186,75 @@ import './styles.css';
 
 // *module 11 7 promise**********************************************************************
 
-const promise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        // resolve('There was success :)  ');
-        reject('There was an error :(  ');
-    }, 2000);
-})
+// const promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         // resolve('There was success :)  ');
+//         reject('There was an error :(  ');
+//     }, 2000);
+// })
 
-promise
-    .then(data => {
-        console.log(data)
-    })
-    .catch(error => {
-        console.log(error)
-    })
-    .finally(()=>console.log('The END.'));
+// promise
+//     .then(data => {
+//         console.log(data)
+//     })
+//     .catch(error => {
+//         console.log(error)
+//     })
+//     .finally(()=>console.log('The END.'));
 
 // ***********************************************************************
+// const makePromise = (text,error, delay) => {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() =>
+//             resolve(text),
+//             // reject(error),
+//             delay);
+//     });
+// };
+
+// const promiseA = makePromise('promiseA','errorA', 1000);
+// const promiseB = makePromise('promiseB','errorB', 3000);
+
+// Promise.all([promiseA, promiseB])
+//     .then(result => console.log(result))
+//     .catch(err => console.log(err));
+
+// Promise.race([promiseA, promiseB])
+//   .then(result => console.log(result)) // "promiseA"
+//   .catch(err => console.log(err));
+// ********************************************************
+// const getMessage = function(callback) {
+//   const input = prompt('Введите сообщение');
+
+//   callback(input);
+// };
+
+// const logger = message => console.log(message);
+
+// getMessage(logger);
+// ************************************************
+
+// const getMessage = function () {
+//     const input = prompt('Введите сообщение');
+//     return Promise.resolve(input);
+// }
+
+// const logger = message => console.log(message);
+
+// // getMessage().then(message => logger(message));
+// getMessage().then(logger);
+
+// **************************************
+const promise = new Promise((resolve, reject) => {
+    const canFullfill = Math.random() > 0.5;
+    setTimeout(() => {
+        if (canFullfill) {
+        resolve('Промис выполнился успешно, с результатом (исполнен fulfilled)')
+    }
+    reject('Промис выполнился с ошибкой (отклонен, rejected)');
+    },2000)
+});
+
+promise.then((arg) => { console.log(arg) }).catch((arg) => { console.log(arg) });
+
+console.log(promise);
