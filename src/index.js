@@ -244,17 +244,66 @@ import './styles.css';
 // // getMessage().then(message => logger(message));
 // getMessage().then(logger);
 
-// **************************************
-const promise = new Promise((resolve, reject) => {
-    const canFullfill = Math.random() > 0.5;
+// **************************************+
+// let data = 'тут ещё ничего нет';
+// const promise = new Promise((resolve, reject) => {
+//     const canFullfill = Math.random() > 0.5;
+//     setTimeout(() => {
+//         if (canFullfill) {
+//         resolve('Промис выполнился успешно, с результатом (исполнен fulfilled)')
+//     }
+//     reject('Промис выполнился с ошибкой (отклонен, rejected)');
+//     },1000)
+// });
+
+// promise.then(arg => { console.log(arg); data = arg; },arg => { console.log('error',arg) }).catch((arg) => { console.log(arg) });
+
+// console.log(promise);
+
+// setTimeout(() => {
+//     console.log(data);
+// }, 3000);
+
+// promise.then(result => {
+//     console.log(result);
+//     return 5;
+// })
+//     .then(x => {
+//         console.log(x);
+//         return 10
+//     })
+//     .then(y => {
+//         throw new Error('ошибка 3-го then');
+//         console.log(y)
+//     })
+//     .catch(err => { console.log(err) })
+//     .finally(()=>{console.log('Я работаю всегда')});
+   
+// ****************************************************
+
+const makeOrder = (dish, onSuccess, onError) => {
+    const DELAY = 1000;
+
+    const passed = Math.random() > 0.5;
+
     setTimeout(() => {
-        if (canFullfill) {
-        resolve('Промис выполнился успешно, с результатом (исполнен fulfilled)')
-    }
-    reject('Промис выполнился с ошибкой (отклонен, rejected)');
-    },2000)
-});
+        if (passed) {
+            onSuccess(`вот ваше блюдо ${dish}`);
 
-promise.then((arg) => { console.log(arg) }).catch((arg) => { console.log(arg) });
+        } else {
+            onError('извините закончились продукты');
+        }
+    }, DELAY);
+};
 
-console.log(promise);
+makeOrder('пирожок', onMakeOrderSuccess, onMakeOrderError);
+
+function onMakeOrderSuccess(result) {
+    console.log('onMakeOrderSuccess');
+    console.log(result);
+}
+
+function onMakeOrderError(error) {
+    console.log('onMakeOrderError');
+    console.log(error);
+};
