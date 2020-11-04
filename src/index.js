@@ -280,30 +280,75 @@ import './styles.css';
 //     .finally(()=>{console.log('Я работаю всегда')});
    
 // ****************************************************
+// const makeOrder = (dish, onSuccess, onError) => {
+//     const DELAY = 1000;
 
-const makeOrder = (dish, onSuccess, onError) => {
-    const DELAY = 1000;
+//     const passed = Math.random() > 0.5;
 
-    const passed = Math.random() > 0.5;
+//     setTimeout(() => {
+//         if (passed) {
+//             onSuccess(`вот ваше блюдо ${dish}`);
 
-    setTimeout(() => {
-        if (passed) {
-            onSuccess(`вот ваше блюдо ${dish}`);
+//         } else {
+//             onError('извините закончились продукты');
+//         }
+//     }, DELAY);
+// };
 
+// makeOrder('пирожок', onMakeOrderSuccess, onMakeOrderError);
+
+// function onMakeOrderSuccess(result) {
+//     console.log('onMakeOrderSuccess');
+//     console.log(result);
+// }
+
+// function onMakeOrderError(error) {
+//     console.log('onMakeOrderError');
+//     console.log(error);
+// };
+// ***************************************************
+// const makeOrder = dish => {
+//     const DELAY = 1000;
+
+//     return new Promise((resolve, reject) => {
+//         const passed = Math.random() > 0.5;
+
+//         setTimeout(() => {
+//             if (passed) {
+//                 resolve(`вот ваше блюдо - ${dish}`)
+//             } else {
+//                 reject('Извините закончились продукты')
+//             }
+//         }, DELAY);
+    
+//     });
+// };
+
+// makeOrder('пирожок').then(onMakeOrderSuccess).catch(onMakeOrderError)
+
+// function onMakeOrderSuccess(result) {
+//     console.log('onMakeOrderSuccess');
+//     console.log(result);
+// }
+
+// function onMakeOrderError(error) {
+//     console.log('onMakeOrderError');
+//     console.log(error);
+// };
+// ***********************************
+
+const makePromise = () => {
+    return new Promise((resolve, reject) => {
+        const pass = Math.random() > 0.5;
+        if (pass) {
+            resolve('Куку это resolve');
         } else {
-            onError('извините закончились продукты');
+            reject('Ошибка выполнения');
         }
-    }, DELAY);
+    });
+    
 };
 
-makeOrder('пирожок', onMakeOrderSuccess, onMakeOrderError);
-
-function onMakeOrderSuccess(result) {
-    console.log('onMakeOrderSuccess');
-    console.log(result);
-}
-
-function onMakeOrderError(error) {
-    console.log('onMakeOrderError');
-    console.log(error);
-};
+makePromise()
+    .then(result => console.log(result))
+    .catch(error=>console.log(error));
