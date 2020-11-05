@@ -337,18 +337,78 @@ import './styles.css';
 // };
 // ***********************************
 
-const makePromise = () => {
-    return new Promise((resolve, reject) => {
-        const pass = Math.random() > 0.5;
-        if (pass) {
-            resolve('Куку это resolve');
-        } else {
-            reject('Ошибка выполнения');
-        }
-    });
+// const makePromise = () => {
+//     return new Promise((resolve, reject) => {
+//         const pass = Math.random() > 0.5;
+//         if (pass) {
+//             resolve('Куку это resolve');
+//         } else {
+//             reject('Ошибка выполнения');
+//         }
+//     });
     
+// };
+
+// makePromise()
+//     .then(result => console.log(result))
+//     .catch(error => console.log(error));
+    
+    //***module 11 7 horse************************************************** */
+const horses = [
+    'Secretariat',
+    'Eclipse',
+    'West Australian',
+    'Flying Fox',
+    'Seabiscuit'
+];
+
+const refs = {
+    startBtn: document.querySelector('.js-start-race'),
+    winnerField: document.querySelector('.js-winner'),
+    progressField: document.querySelector('.js-progress'),
+    tableBody: document.querySelector('.js-resultbody > tbody')
 };
 
-makePromise()
-    .then(result => console.log(result))
-    .catch(error=>console.log(error));
+refs.startBtn.addEventListener('click', () => {
+    const promises = horses.map(horse => run(horse));
+
+    refs.progressField.textContent = 'Заезд начался'
+
+    Promise.race(promises).then(({ horse, time }) => {
+    refs.winnerField.textContent=`Лошадь ${horse} приехала за ${time} время`;
+    });
+
+    Promise.all(promises).then(() => {
+      refs.progressField.textContent='Заезд окончен'  
+    });
+})
+
+// console.log(promises);
+
+
+
+// 
+
+// //const result=promises.map(p => p.then(consolResult));
+
+function consolResult(result) {
+console.log(result)
+};
+
+function run(horse) {
+    
+    return new Promise((resolve,reject) =>{
+        const time = getRandomTime(1000, 3500);
+
+        setTimeout(() => {
+            resolve({horse,time})
+        }, time);
+    });
+}
+
+
+
+function getRandomTime(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+// ****************************************************

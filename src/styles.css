@@ -100,3 +100,6 @@ img {
   background-color: #2196f3;
 }
 /* *************************************************************** */
+.js-result-table th {
+  border: solid 1px;
+}
