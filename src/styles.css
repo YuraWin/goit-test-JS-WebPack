@@ -103,3 +103,7 @@ img {
 .js-result-table th {
   border: solid 1px;
 }
+
+.js-result-table td {
+  border: solid 1px;
+}

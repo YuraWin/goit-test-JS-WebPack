@@ -361,35 +361,52 @@ const horses = [
     'Flying Fox',
     'Seabiscuit'
 ];
-
+let raceCounter = 0;
 const refs = {
     startBtn: document.querySelector('.js-start-race'),
     winnerField: document.querySelector('.js-winner'),
     progressField: document.querySelector('.js-progress'),
-    tableBody: document.querySelector('.js-resultbody > tbody')
+    tableBody: document.querySelector('.js-result-table > tbody')
 };
 
-refs.startBtn.addEventListener('click', () => {
+refs.startBtn.addEventListener('click', onStart);
+
+function onStart() {
+    raceCounter += 1;
     const promises = horses.map(horse => run(horse));
 
-    refs.progressField.textContent = 'Заезд начался'
+    updateWinnerField('');
+    updateProgressField('Заезд начался');
+    determineWinner(promises);
+    waitForAll(promises);
+       
+}
 
-    Promise.race(promises).then(({ horse, time }) => {
-    refs.winnerField.textContent=`Лошадь ${horse} приехала за ${time} время`;
+function determineWinner(horsesP) {
+    Promise.race(horsesP).then(({ horse, time }) => {
+        updateWinnerField(`Лошадь ${horse} приехала за ${time} время`);
+        updateResultsTable({ horse, time, raceCounter });
     });
+    }
 
-    Promise.all(promises).then(() => {
-      refs.progressField.textContent='Заезд окончен'  
-    });
-})
+function waitForAll(horsesP){
+    Promise.all(horsesP).then(() => {
+        updateProgressField('Заезд окончен');
+    })
+}
+    
+function updateWinnerField(message){
+     refs.winnerField.textContent=message
+}
 
-// console.log(promises);
+function updateProgressField(message) {
+    refs.progressField.textContent=message;
+}
 
-
-
-// 
-
-// //const result=promises.map(p => p.then(consolResult));
+function updateResultsTable({ horse, time, raceCounter }) {
+    const tr = `<tr><td>${raceCounter}</td><td>${horse}</td><td>${time}</td></tr>`;
+    refs.tableBody.insertAdjacentHTML('beforeend', tr);
+}
 
 function consolResult(result) {
 console.log(result)
