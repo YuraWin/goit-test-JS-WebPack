@@ -354,78 +354,113 @@ import './styles.css';
 //     .catch(error => console.log(error));
     
     //***module 11 7 horse************************************************** */
-const horses = [
-    'Secretariat',
-    'Eclipse',
-    'West Australian',
-    'Flying Fox',
-    'Seabiscuit'
-];
-let raceCounter = 0;
-const refs = {
-    startBtn: document.querySelector('.js-start-race'),
-    winnerField: document.querySelector('.js-winner'),
-    progressField: document.querySelector('.js-progress'),
-    tableBody: document.querySelector('.js-result-table > tbody')
-};
+// const horses = [
+//     'Secretariat',
+//     'Eclipse',
+//     'West Australian',
+//     'Flying Fox',
+//     'Seabiscuit'
+// ];
+// let raceCounter = 0;
+// const refs = {
+//     startBtn: document.querySelector('.js-start-race'),
+//     winnerField: document.querySelector('.js-winner'),
+//     progressField: document.querySelector('.js-progress'),
+//     tableBody: document.querySelector('.js-result-table > tbody')
+// };
 
-refs.startBtn.addEventListener('click', onStart);
+// refs.startBtn.addEventListener('click', onStart);
 
-function onStart() {
-    raceCounter += 1;
-    const promises = horses.map(horse => run(horse));
+// function onStart() {
+//     raceCounter += 1;
+//     const promises = horses.map(horse => run(horse));
 
-    updateWinnerField('');
-    updateProgressField('Заезд начался');
-    determineWinner(promises);
-    waitForAll(promises);
+//     updateWinnerField('');
+//     updateProgressField('Заезд начался');
+//     determineWinner(promises);
+//     waitForAll(promises);
        
-}
+// }
 
-function determineWinner(horsesP) {
-    Promise.race(horsesP).then(({ horse, time }) => {
-        updateWinnerField(`Лошадь ${horse} приехала за ${time} время`);
-        updateResultsTable({ horse, time, raceCounter });
-    });
-    }
+// function determineWinner(horsesP) {
+//     Promise.race(horsesP).then(({ horse, time }) => {
+//         updateWinnerField(`Лошадь ${horse} приехала за ${time} время`);
+//         updateResultsTable({ horse, time, raceCounter });
+//     });
+//     }
 
-function waitForAll(horsesP){
-    Promise.all(horsesP).then(() => {
-        updateProgressField('Заезд окончен');
-    })
-}
+// function waitForAll(horsesP){
+//     Promise.all(horsesP).then(() => {
+//         updateProgressField('Заезд окончен');
+//     })
+// }
     
-function updateWinnerField(message){
-     refs.winnerField.textContent=message
-}
+// function updateWinnerField(message){
+//      refs.winnerField.textContent=message
+// }
 
-function updateProgressField(message) {
-    refs.progressField.textContent=message;
-}
+// function updateProgressField(message) {
+//     refs.progressField.textContent=message;
+// }
 
-function updateResultsTable({ horse, time, raceCounter }) {
-    const tr = `<tr><td>${raceCounter}</td><td>${horse}</td><td>${time}</td></tr>`;
-    refs.tableBody.insertAdjacentHTML('beforeend', tr);
-}
+// function updateResultsTable({ horse, time, raceCounter }) {
+//     const tr = `<tr><td>${raceCounter}</td><td>${horse}</td><td>${time}</td></tr>`;
+//     refs.tableBody.insertAdjacentHTML('beforeend', tr);
+// }
 
-function consolResult(result) {
-console.log(result)
+// function consolResult(result) {
+// console.log(result)
+// };
+
+// function run(horse) {
+    
+//     return new Promise((resolve,reject) =>{
+//         const time = getRandomTime(1000, 3500);
+
+//         setTimeout(() => {
+//             resolve({horse,time})
+//         }, time);
+//     });
+// }
+
+
+
+// function getRandomTime(min, max) {
+//     return Math.floor(Math.random() * (max - min + 1) + min);
+// }
+// ****************************************************
+//*module 12-HTTP****************************************** */
+import pokemonCardTpl from './template/pokemon-card.hbs' 
+import API from './js/api-service';
+import getRefs from './js/get-refs';
+
+const refs = getRefs();
+
+refs.searchForm.addEventListener('submit', onSearch);
+
+function onSearch(e) {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const searchQuery = form.elements.query.value;
+
+    API.fetchPokemon(searchQuery)
+    .then(renderPokemonCard)
+    .catch(onFetchError)
+    .finally(form.reset());
 };
 
-function run(horse) {
-    
-    return new Promise((resolve,reject) =>{
-        const time = getRandomTime(1000, 3500);
+function renderPokemonCard(pokemon) {
+const markup = pokemonCardTpl(pokemon);
+        refs.cardContainer.innerHTML=markup;
+} 
 
-        setTimeout(() => {
-            resolve({horse,time})
-        }, time);
-    });
-}
+function onFetchError(error) {
+ alert('Упс что-то пошло не так, мы не нашли Вашего покемона ')
+};
 
+//====================================================
 
-
-function getRandomTime(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
-// ****************************************************
+fetch('https://pixabay.com/api/?key=19030370-3b0ac62398e7506ebf605c4ab&q=мышки&image_type=photo')
+    .then(r => r.json())
+    .then(console.log);

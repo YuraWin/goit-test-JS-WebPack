@@ -107,3 +107,9 @@ img {
 .js-result-table td {
   border: solid 1px;
 }
+
+/* module 12 pokemon-API****************************************** */
+
+.js-card-container {
+  display: inline-block;
+}
