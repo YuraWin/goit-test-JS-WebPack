@@ -278,7 +278,7 @@ import './styles.css';
 //     })
 //     .catch(err => { console.log(err) })
 //     .finally(()=>{console.log('Я работаю всегда')});
-   
+
 // ****************************************************
 // const makeOrder = (dish, onSuccess, onError) => {
 //     const DELAY = 1000;
@@ -320,7 +320,7 @@ import './styles.css';
 //                 reject('Извините закончились продукты')
 //             }
 //         }, DELAY);
-    
+
 //     });
 // };
 
@@ -346,14 +346,14 @@ import './styles.css';
 //             reject('Ошибка выполнения');
 //         }
 //     });
-    
+
 // };
 
 // makePromise()
 //     .then(result => console.log(result))
 //     .catch(error => console.log(error));
-    
-    //***module 11 7 horse************************************************** */
+
+//***module 11 7 horse************************************************** */
 // const horses = [
 //     'Secretariat',
 //     'Eclipse',
@@ -379,7 +379,7 @@ import './styles.css';
 //     updateProgressField('Заезд начался');
 //     determineWinner(promises);
 //     waitForAll(promises);
-       
+
 // }
 
 // function determineWinner(horsesP) {
@@ -394,7 +394,7 @@ import './styles.css';
 //         updateProgressField('Заезд окончен');
 //     })
 // }
-    
+
 // function updateWinnerField(message){
 //      refs.winnerField.textContent=message
 // }
@@ -413,7 +413,7 @@ import './styles.css';
 // };
 
 // function run(horse) {
-    
+
 //     return new Promise((resolve,reject) =>{
 //         const time = getRandomTime(1000, 3500);
 
@@ -430,7 +430,7 @@ import './styles.css';
 // }
 // ****************************************************
 //*module 12-HTTP****************************************** */
-import pokemonCardTpl from './template/pokemon-card.hbs' 
+import pokemonCardTpl from './template/pokemon-card.hbs'
 import API from './js/api-service';
 import getRefs from './js/get-refs';
 
@@ -445,22 +445,36 @@ function onSearch(e) {
     const searchQuery = form.elements.query.value;
 
     API.fetchPokemon(searchQuery)
-    .then(renderPokemonCard)
-    .catch(onFetchError)
-    .finally(form.reset());
+        .then(renderPokemonCard)
+        .catch(onFetchError)
+        .finally(form.reset());
 };
 
 function renderPokemonCard(pokemon) {
-const markup = pokemonCardTpl(pokemon);
-        refs.cardContainer.innerHTML=markup;
-} 
+    const markup = pokemonCardTpl(pokemon);
+    refs.cardContainer.innerHTML = markup;
+}
 
 function onFetchError(error) {
- alert('Упс что-то пошло не так, мы не нашли Вашего покемона ')
+    alert('Упс что-то пошло не так, мы не нашли Вашего покемона ')
 };
 
 //====================================================
 
-fetch('https://pixabay.com/api/?key=19030370-3b0ac62398e7506ebf605c4ab&q=мышки&image_type=photo')
+// fetch('https://pixabay.com/api/?key=19030370-3b0ac62398e7506ebf605c4ab&q=мышки&image_type=photo')
+//     .then(r => r.json())
+//     .then(console.log);
+
+// fetch('http://api.weatherstack.com/current?access_key=f04e767601b79d157b2f4a7fde1ee53d&query=Kiev')
+//     .then(r => r.json())
+//     .then(console.log);
+
+const url = 'https://newsapi.org/v2/everything?q=Zhitomir';
+const options = {
+    headers: {
+        'Authorization': '5fdf360460fb4a5cbc09014c3a1d10aa'
+    }
+}
+fetch(url, options)
     .then(r => r.json())
-    .then(console.log);
+    .then(console.log)
