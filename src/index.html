@@ -71,16 +71,33 @@ aria-hidden="true"
 </table> -->
 
   <!-- *module 12 **************************************************************** -->
-  <form class="form-inline search-form js-search-form">
+  <!-- <form class="form-inline search-form js-search-form">
     <div class="form-group">
       <input type="text" class="form-control" name='query'>
     </div>
 
     <button type="submit" class="btn btn-primary">Искать</button>
   </form>
-  <div class="js-card-container"></div>
-  <!-- *module 11 **************************************************************** -->
-  <!-- *module 11 **************************************************************** -->
+  <div class="js-card-container"></div> -->
+
+  <!-- *module 12-HTTP paginations **************************************************************** -->
+<form class="form-inline search-form js-search-form">
+  <div class="form-group mx-sm-3 mb-2">
+    <label for="searchQuery" class="sr-only">Что ищем?</label>
+    <input type="text" class="form-control" name='query' id="searchQuery" placeholder="Что ищем?" autocomplete="off"/>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2">Искать</button>
+</form>
+<ul class="articles js-articles-container"></ul>
+
+<button type="button" class="btn btn-primary button" data-action="load-more">
+  <span class="spinner-border spinner-border-sm spinner is-hidden" role="status" aria-hidden="true"
+  ></span>
+  
+  <span class="label">Показать ещё</span>
+</button>
+
+  <!-- *module 12 **************************************************************** -->
 
 
 

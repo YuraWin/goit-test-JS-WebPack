@@ -430,34 +430,34 @@ import './styles.css';
 // }
 // ****************************************************
 //*module 12-HTTP****************************************** */
-import pokemonCardTpl from './template/pokemon-card.hbs'
-import API from './js/api-service';
-import getRefs from './js/get-refs';
+// import pokemonCardTpl from './template/pokemon-card.hbs'
+// import API from './js/api-service';
+// import getRefs from './js/get-refs';
 
-const refs = getRefs();
+// const refs = getRefs();
 
-refs.searchForm.addEventListener('submit', onSearch);
+// refs.searchForm.addEventListener('submit', onSearch);
 
-function onSearch(e) {
-    e.preventDefault();
+// function onSearch(e) {
+//     e.preventDefault();
 
-    const form = e.currentTarget;
-    const searchQuery = form.elements.query.value;
+//     const form = e.currentTarget;
+//     const searchQuery = form.elements.query.value;
 
-    API.fetchPokemon(searchQuery)
-        .then(renderPokemonCard)
-        .catch(onFetchError)
-        .finally(form.reset());
-};
+//     API.fetchPokemon(searchQuery)
+//         .then(renderPokemonCard)
+//         .catch(onFetchError)
+//         .finally(form.reset());
+// };
 
-function renderPokemonCard(pokemon) {
-    const markup = pokemonCardTpl(pokemon);
-    refs.cardContainer.innerHTML = markup;
-}
+// function renderPokemonCard(pokemon) {
+//     const markup = pokemonCardTpl(pokemon);
+//     refs.cardContainer.innerHTML = markup;
+// }
 
-function onFetchError(error) {
-    alert('Упс что-то пошло не так, мы не нашли Вашего покемона ')
-};
+// function onFetchError(error) {
+//     alert('Упс что-то пошло не так, мы не нашли Вашего покемона ')
+// };
 
 //====================================================
 
@@ -469,12 +469,42 @@ function onFetchError(error) {
 //     .then(r => r.json())
 //     .then(console.log);
 
-const url = 'https://newsapi.org/v2/everything?q=Zhitomir';
-const options = {
-    headers: {
-        'Authorization': '5fdf360460fb4a5cbc09014c3a1d10aa'
-    }
+// const url = 'https://newsapi.org/v2/everything?q=Zhitomir';
+// const options = {
+//     headers: {
+//         'Authorization': '5fdf360460fb4a5cbc09014c3a1d10aa'
+//     }
+// }
+// fetch(url, options)
+//     .then(r => r.json())
+//     .then(console.log);
+
+//**module 12-HTTP paginations********************************************************** */
+import NewsApiService from './js/news-sevice'
+
+const refs = {
+    searchForm: document.querySelector('.js-search-form'),
+    articlesContainer: document.querySelector('.js-articles-container'),
+    loadMoreBtn: document.querySelector('[data-action="load-more"]'),
 }
-fetch(url, options)
-    .then(r => r.json())
-    .then(console.log)
+
+const newsApiService = new NewsApiService();
+
+refs.searchForm.addEventListener('submit', onSearch);
+refs.loadMoreBtn.addEventListener('click', onLoadMore);
+
+
+function onSearch(e) {
+    e.preventDefault();
+    newsApiService.query = e.currentTarget.elements.query.value;
+
+    newsApiService.fetchArticles(newsApiService.query);
+
+};
+
+function onLoadMore() {
+
+    newsApiService.fetchArticles(newsApiService.query);
+
+};
+
