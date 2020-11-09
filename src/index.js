@@ -481,30 +481,57 @@ import './styles.css';
 
 //**module 12-HTTP paginations********************************************************** */
 import NewsApiService from './js/news-sevice'
+import articlesTpl from './template/articles.hbs'
+import LoadMoreBtn from './js/load-more-btn'
 
 const refs = {
     searchForm: document.querySelector('.js-search-form'),
     articlesContainer: document.querySelector('.js-articles-container'),
-    loadMoreBtn: document.querySelector('[data-action="load-more"]'),
+    // loadMoreBtn: document.querySelector('[data-action="load-more"]'),
 }
-
+const loadMoreBtn = new LoadMoreBtn({
+    selector: '[data-action="load-more"]',
+    hidden:true,
+});
+    
 const newsApiService = new NewsApiService();
 
+
 refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
+loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 
 
 function onSearch(e) {
     e.preventDefault();
     newsApiService.query = e.currentTarget.elements.query.value;
 
-    newsApiService.fetchArticles(newsApiService.query);
+    if (newsApiService.query === '') {
+        return alert('Введи что-то нормальное');
+}
+    loadMoreBtn.show();
+    loadMoreBtn.disable();
 
+    newsApiService.resetPage();
+    
+    newsApiService.fetchArticles().then(articles => {
+        clearArticlesContainer();
+        appendArticlesMarkup(articles); 
+    
+        loadMoreBtn.enable();
+    });
 };
 
 function onLoadMore() {
-
-    newsApiService.fetchArticles(newsApiService.query);
-
+    loadMoreBtn.disable();
+    newsApiService.fetchArticles().then(result => {
+        appendArticlesMarkup(result);
+        loadMoreBtn.enable();
+    });
 };
 
+function appendArticlesMarkup(articles) {
+    refs.articlesContainer.insertAdjacentHTML('beforeend', articlesTpl(articles));
+}
+function clearArticlesContainer() {
+    refs.articlesContainer.innerHTML = '';
+}

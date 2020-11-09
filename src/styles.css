@@ -113,3 +113,37 @@ img {
 .js-card-container {
   display: inline-block;
 }
+/* ************************************************************* */
+.articles {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.articles a {
+  text-decoration: none;
+}
+.articles > li {
+  display: inline-block;
+  margin: 10px 10px;
+  width: 215px;
+  height: 350px;
+  list-style: none;
+  overflow: hidden;
+}
+.articles h2 {
+  font-size: 20px;
+}
+
+.button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.button.is-hidden {
+  display: none;
+}
+
+.button > .spinner.is-hidden {
+  display: none;
+}
