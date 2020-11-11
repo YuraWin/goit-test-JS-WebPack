@@ -480,58 +480,118 @@ import './styles.css';
 //     .then(console.log);
 
 //**module 12-HTTP paginations********************************************************** */
-import NewsApiService from './js/news-sevice'
-import articlesTpl from './template/articles.hbs'
-import LoadMoreBtn from './js/load-more-btn'
+// import NewsApiService from './js/news-sevice'
+// import articlesTpl from './template/articles.hbs'
+// import LoadMoreBtn from './js/load-more-btn'
 
-const refs = {
-    searchForm: document.querySelector('.js-search-form'),
-    articlesContainer: document.querySelector('.js-articles-container'),
-    // loadMoreBtn: document.querySelector('[data-action="load-more"]'),
-}
-const loadMoreBtn = new LoadMoreBtn({
-    selector: '[data-action="load-more"]',
-    hidden:true,
-});
+// const refs = {
+//     searchForm: document.querySelector('.js-search-form'),
+//     articlesContainer: document.querySelector('.js-articles-container'),
+//     // loadMoreBtn: document.querySelector('[data-action="load-more"]'),
+// }
+// const loadMoreBtn = new LoadMoreBtn({
+//     selector: '[data-action="load-more"]',
+//     hidden:true,
+// });
     
-const newsApiService = new NewsApiService();
+// const newsApiService = new NewsApiService();
 
 
-refs.searchForm.addEventListener('submit', onSearch);
-loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
+// refs.searchForm.addEventListener('submit', onSearch);
+// loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 
 
-function onSearch(e) {
-    e.preventDefault();
-    newsApiService.query = e.currentTarget.elements.query.value;
+// function onSearch(e) {
+//     e.preventDefault();
+//     newsApiService.query = e.currentTarget.elements.query.value;
 
-    if (newsApiService.query === '') {
-        return alert('Введи что-то нормальное');
-}
-    loadMoreBtn.show();
-    loadMoreBtn.disable();
+//     if (newsApiService.query === '') {
+//         return alert('Введи что-то нормальное');
+// }
+//     loadMoreBtn.show();
+//     loadMoreBtn.disable();
 
-    newsApiService.resetPage();
+//     newsApiService.resetPage();
     
-    newsApiService.fetchArticles().then(articles => {
-        clearArticlesContainer();
-        appendArticlesMarkup(articles); 
+//     newsApiService.fetchArticles().then(articles => {
+//         clearArticlesContainer();
+//         appendArticlesMarkup(articles); 
     
-        loadMoreBtn.enable();
-    });
-};
+//         loadMoreBtn.enable();
+//     });
+// };
 
-function onLoadMore() {
-    loadMoreBtn.disable();
-    newsApiService.fetchArticles().then(result => {
-        appendArticlesMarkup(result);
-        loadMoreBtn.enable();
-    });
-};
+// function onLoadMore() {
+//     loadMoreBtn.disable();
+//     newsApiService.fetchArticles().then(result => {
+//         appendArticlesMarkup(result);
+//         loadMoreBtn.enable();
+//     });
+// };
 
-function appendArticlesMarkup(articles) {
-    refs.articlesContainer.insertAdjacentHTML('beforeend', articlesTpl(articles));
-}
-function clearArticlesContainer() {
-    refs.articlesContainer.innerHTML = '';
-}
+// function appendArticlesMarkup(articles) {
+//     refs.articlesContainer.insertAdjacentHTML('beforeend', articlesTpl(articles));
+// }
+// function clearArticlesContainer() {
+//     refs.articlesContainer.innerHTML = '';
+// }
+
+// ***module 13 *CRUD***************************************************
+// **************ADD
+// const postToAdd = {
+//     author: 'Orange',
+//     content: 'How eat food',
+// };
+// const options = {
+//     method: 'POST',
+//     body: JSON.stringify(postToAdd),
+//     headers: {
+//         'Content-Type': 'application/json; charset=UTF-8',
+//     },
+// }
+
+// fetch('https://jsonplaceholder.typicode.com/posts', options)
+//     .then(response => response.json())
+//     .then(post => console.log(post))
+//     .catch(error => console.log(error));
+// ***************GET (read)
+    // fetch('https://jsonplaceholder.typicode.com/posts/1')
+    // .then(response => response.json())
+    // .then(post => console.log(post))
+    // .catch(error => console.log(error));
+
+    // **********UPDATE
+// const postId = 1;
+// const postToUpdate = {
+//     body: 'CRUD is really cruto',
+// };
+// const options = {
+//     method: 'PUT',
+//     body: JSON.stringify(postToUpdate),
+//      headers: {
+//         'Content-Type': 'application/json; charset=UTF-8',
+//     },
+// }
+//  fetch (`https://jsonplaceholder.typicode.com/posts/${postId}`,options)
+
+// *****************DELETE
+
+// const postIdDel= 1;
+
+// const options = {
+//     method: 'DELETE',
+//     }
+// fetch(`https://jsonplaceholder.typicode.com/${postIdDel}`, options)
+//     .then((el) => {
+//         console.log(el);
+//         console.log('success');
+//     })
+//  .catch(error => console.log('ERROR' + error));
+
+
+// *************************************************************************
+
+// *************************************************************************
+// *************************************************************************
+// *************************************************************************
+
