@@ -589,7 +589,88 @@ import './styles.css';
 //  .catch(error => console.log('ERROR' + error));
 
 
-// *************************************************************************
+// **module 13 CRUD video***********************************************************************
+const BASE_URL = 'http://localhost:3000';
+
+// function fetchBooks() {
+//     fetch(`${BASE_URL}/books/`)
+//         .then(r => r.json())
+//         .then(result => console.log(result))
+//     .catch(err=>console.log('error',err))
+// }
+
+// function fetchBookById(id) {
+//     fetch(`${BASE_URL}/books/${id}`)
+//         .then(r => r.json())
+//         .then(result => console.log(result))
+//     .catch(err=>console.log('error',err))
+// }
+
+// const newBook = {
+//     title: 'Кулинария барбекю',
+//     author: 'ПЕтренко',
+//     genres: ['ужасы', 'мистика'],
+//     rating: 5,
+// };
+
+// function addBook(book) {
+//     const options = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(book),
+//     }
+    
+//     return fetch(`${BASE_URL}/books/`, options)
+//         .then(p => p.json())
+      
+    
+// };
+
+// addBook({
+//     title: 'Кулинария шашлык',
+//     author: 'ПИванов',
+//     genres: ['мистика'],
+//     rating: 1,
+// }).then(renderBook);
+
+// addBook({
+//     title: 'Как стать дуном?',
+//     author: 'Репета',
+//     genres: ['триллер'],
+//     rating: 10,
+// }).then(renderBook);
+
+// function renderBook(book) {
+//     console.log('Пришел ответ можно рисовать  книгу');
+//     console.log(book);
+// }
+
+function updateBookById(update, bookId) {
+    
+    const options = {
+    method: 'PATCH',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(update)
+    };
+    
+    return fetch(`${BASE_URL}/books/${bookId}`, options)
+        .then(res=>res.json());
+}
+
+updateBookById({ title: 'Супер пупер книга' },25);
+updateBookById({ title: 'Балаган' },26);
+updateBookById({ rating:1,author:'Манго' },27);
+
+
+
+// fetchBooks();
+
+// fetchBookById(3);
+
 
 // *************************************************************************
 // *************************************************************************
