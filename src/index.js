@@ -600,11 +600,18 @@ const BASE_URL = 'http://localhost:3000';
 // }
 
 // function fetchBookById(id) {
-//     fetch(`${BASE_URL}/books/${id}`)
-//         .then(r => r.json())
-//         .then(result => console.log(result))
-//     .catch(err=>console.log('error',err))
+//     return fetch(`${BASE_URL}/books/${id}`)
+//         .then(r => {
+//             if (r.ok) {
+//             return r.json()
+//             }
+//             throw new Error(r.statusText)
+//         })
+//          .then(result => console.log(result))
 // }
+
+// fetchBookById(112)
+//         .catch(err=>console.log('error',err));
 
 // const newBook = {
 //     title: 'Кулинария барбекю',
@@ -647,30 +654,39 @@ const BASE_URL = 'http://localhost:3000';
 //     console.log(book);
 // }
 
-function updateBookById(update, bookId) {
+// function updateBookById(update, bookId) {
     
-    const options = {
-    method: 'PATCH',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(update)
-    };
+//     const options = {
+//     method: 'PATCH',
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(update)
+//     };
     
-    return fetch(`${BASE_URL}/books/${bookId}`, options)
-        .then(res=>res.json());
-}
+//     return fetch(`${BASE_URL}/books/${bookId}`, options)
+//         .then(res=>res.json());
+// }
 
-updateBookById({ title: 'Супер пупер книга' },25);
-updateBookById({ title: 'Балаган' },26);
-updateBookById({ rating:1,author:'Манго' },27);
+// updateBookById({ title: 'Супер пупер книга' },25);
+// updateBookById({ title: 'Балаган' },26);
+// updateBookById({ rating:1,author:'Манго' },27);
 
+
+// function deleteBookById(bookId) {
+//     const options = {
+//         method:'DELETE'
+//     }
+//     return fetch(`${BASE_URL}/books/${bookId}`, options)
+//          .then(res=>res.json());
+// }
+
+// deleteBookById(30);
 
 
 // fetchBooks();
 
 // fetchBookById(3);
-
 
 // *************************************************************************
 // *************************************************************************
