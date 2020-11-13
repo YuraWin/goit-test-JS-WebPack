@@ -590,7 +590,7 @@ import './styles.css';
 
 
 // **module 13 CRUD video***********************************************************************
-const BASE_URL = 'http://localhost:3000';
+// const BASE_URL = 'http://localhost:3000';
 
 // function fetchBooks() {
 //     fetch(`${BASE_URL}/books/`)
@@ -688,7 +688,95 @@ const BASE_URL = 'http://localhost:3000';
 
 // fetchBookById(3);
 
+// **module 13 TRY/CATCH ***********************************************************************
+
+
+// try {
+//     console.log('Код в блоке Try до ошибки')
+//     console.log(myVar);
+//     console.log('Код в блоке Try после ошибки')
+// }
+// catch (error) {
+    
+//     console.log('Ошибка в коде')
+
+//     console.dir(error.message);
+    
+// }
+// console.log('Код в конце')
+
+// *************************
+// const validJSON = '{"name":"Манго", "age":35}';
+// const invalidJSON = '{ backend return surprice}';
+
+// try {
+//     console.log('1');
+
+//     console.log(JSON.parse(invalidJSON));
+
+//     console.log('2');
+// }
+// catch (err) {
+//     if (err.name ==='SyntaxError')
+//     console.log('Ошибка парса json надо исправлять что-ли');
+    
+// }
+// console.log('выполняем код дальше');
+
+// **module 13 Async/await**********************************************************
+
+// function getFruit(name) {
+//     const fruits = {
+//         strawberry: 'Клубника',
+//         kiwi: 'Киви',
+//         apple: 'Яблоко',
+//     };
+//     return new Promise((resolve,reject) => {
+//         setTimeout(() => reject(fruits[name]), 500)
+//     });
+// }
+// // getFruit('apple').then(fruit => console.log(fruit));
+
+// async function aMakeSmoothie() {
+//     try {
+//         // console.time('aMakeSmoothie')
+//     // const apple = await getFruit('apple');
+//     // console.log(apple);
+
+//     // const kiwi = await getFruit('kiwi');
+//     // console.log(kiwi);
+
+//         const apple = await getFruit('apple');
+        
+//     // const kiwi = getFruit('kiwi');
+//     // const fruits = await Promise.all([apple, kiwi]);
+//     // console.log(fruits);
+
+//     // console.timeEnd('aMakeSmoothie');
+//         return apple;
+//     }
+//     catch (error) {
+//      return  error;
+//     }
+// }
+
+// aMakeSmoothie().then(fruit => console.log(fruit))
+//     .catch(er => console.log('ошибка',er));
+
+
+
+// function makeSmoothie() {
+    
+//     getFruit('apple').then(fruit => {
+//         console.log(fruit);
+
+//         getFruit('kiwi').then(fruit => {
+//             console.log(fruit)
+//         });
+//     });
+// };
+
+// makeSmoothie();
 // *************************************************************************
-// *************************************************************************
-// *************************************************************************
+
 
