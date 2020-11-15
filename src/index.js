@@ -590,7 +590,7 @@ import './styles.css';
 
 
 // **module 13 CRUD video***********************************************************************
-const BASE_URL = 'http://localhost:3000';
+// const BASE_URL = 'http://localhost:3000';
 
 // function fetchBooks() {
 //     fetch(`${BASE_URL}/books/`)
@@ -682,13 +682,102 @@ const BASE_URL = 'http://localhost:3000';
 // }
 
 // deleteBookById(30);
-
-
 // fetchBooks();
-
 // fetchBookById(3);
 
-// *************************************************************************
+// ***module 13 video async /await **********************************************************************
+
+const BASE_URL = 'http://localhost:3000';
+
+
+// function fetchBookById(id) {
+//     return fetch(`${BASE_URL}/books/${id}`)
+//         .then(r => {
+//             if (r.ok) {
+//             return r.json()
+//             }
+//             throw new Error(r.statusText)
+//         })
+//          .then(result => console.log(result))
+// }
+
+// fetchBookById(112)
+//         .catch(err=>console.log('error',err));
+
+const newBook = {
+    title: 'Снежинки',
+    author: 'Хoменко',
+    genres: ['детектив'],
+    rating: 5,
+};
+
+async function addBook(book) {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(book),
+    }
+    const response = await fetch(`${BASE_URL}/books/`, options);
+    const newBook = await response.json();
+    return newBook;
+      
+    
+};
+ 
+// addBook({
+//     title: 'Кулинария шашлык',
+//     author: 'ПИванов',
+//     genres: ['мистика'],
+//     rating: 1,
+// }).then(renderBook);
+
+// addBook({
+//     title: 'Как стать дуном?',
+//     author: 'Репета',
+//     genres: ['триллер'],
+//     rating: 10,
+// }).then(renderBook);
+
+// function renderBook(book) {
+//     console.log('Пришел ответ можно рисовать  книгу');
+//     console.log(book);
+// }
+
+// function updateBookById(update, bookId) {
+    
+//     const options = {
+//     method: 'PATCH',
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(update)
+//     };
+    
+//     return fetch(`${BASE_URL}/books/${bookId}`, options)
+//         .then(res=>res.json());
+// }
+
+// updateBookById({ title: 'Супер пупер книга' },25);
+// updateBookById({ title: 'Балаган' },26);
+// updateBookById({ rating:1,author:'Манго' },27);
+
+
+// function deleteBookById(bookId) {
+//     const options = {
+//         method:'DELETE'
+//     }
+//     return fetch(`${BASE_URL}/books/${bookId}`, options)
+//          .then(res=>res.json());
+// }
+
+// deleteBookById(30);
+// fetchBooks();
+// fetchBookById(3);
+
+
+
 // *************************************************************************
 // *************************************************************************
 
