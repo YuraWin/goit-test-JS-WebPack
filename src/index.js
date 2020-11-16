@@ -780,63 +780,55 @@ import './styles.css';
 const BASE_URL = 'http://localhost:3000';
 
 
-// function fetchBookById(id) {
-//     return fetch(`${BASE_URL}/books/${id}`)
-//         .then(r => {
-//             if (r.ok) {
-//             return r.json()
-//             }
-//             throw new Error(r.statusText)
-//         })
-//          .then(result => console.log(result))
-// }
+// async function fetchBookById(id) {
+//     const r = await fetch(`${BASE_URL}/books/${id}`);
 
-// fetchBookById(112)
+//     if (r.ok) {
+//        const data = await r.json();
+//        return data;
+//     }
+//      throw new Error(r.statusText)
+//    }
+// fetchBookById(19)
+//     .then(book=>console.log(book))
 //         .catch(err=>console.log('error',err));
 
-const newBook = {
-    title: 'Снежинки',
-    author: 'Хoменко',
-    genres: ['детектив'],
-    rating: 5,
-};
+// ***************
+// const newBook = {
+//     title: 'Снежинки',
+//     author: 'Хoменко',
+//     genres: ['детектив'],
+//     rating: 5,
+// };
 
-async function addBook(book) {
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(book),
-    }
-    const response = await fetch(`${BASE_URL}/books/`, options);
-    const newBook = await response.json();
-    return newBook;
+// async function addBook(book) {
+//     const options = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(book),
+//     }
+//     const response = await fetch(`${BASE_URL}/books/`, options);
+//     const newBook = await response.json();
+//     return newBook;
       
-    
-};
- 
-// addBook({
-//     title: 'Кулинария шашлык',
-//     author: 'ПИванов',
-//     genres: ['мистика'],
-//     rating: 1,
-// }).then(renderBook);
+// };
 
-// addBook({
-//     title: 'Как стать дуном?',
-//     author: 'Репета',
-//     genres: ['триллер'],
-//     rating: 10,
-// }).then(renderBook);
-
-// function renderBook(book) {
-//     console.log('Пришел ответ можно рисовать  книгу');
-//     console.log(book);
+// async function addBookAndUpdateUI(newBook) {
+//     try {
+//         const book = await addBook(newBook);
+//         console.log(book);
+//     }
+//     catch (error) {
+//         console.log('ошибка', error);
+//     }
 // }
+ 
+// addBookAndUpdateUI(newBook);
+           //****************** */
 
-// function updateBookById(update, bookId) {
-    
+// async function updateBookById(update, bookId) {
 //     const options = {
 //     method: 'PATCH',
 //     headers: {
@@ -845,29 +837,24 @@ async function addBook(book) {
 //     body: JSON.stringify(update)
 //     };
     
-//     return fetch(`${BASE_URL}/books/${bookId}`, options)
-//         .then(res=>res.json());
+//     const response = await fetch(`${BASE_URL}/books/${bookId}`, options);
+//     const book = await response.json();
+//     return book;
 // }
 
-// updateBookById({ title: 'Супер пупер книга' },25);
-// updateBookById({ title: 'Балаган' },26);
+// updateBookById({ author:'Хоменко' },31);
 // updateBookById({ rating:1,author:'Манго' },27);
+          // ***********************
 
-
-// function deleteBookById(bookId) {
+// async function deleteBookById(bookId) {
 //     const options = {
 //         method:'DELETE'
 //     }
-//     return fetch(`${BASE_URL}/books/${bookId}`, options)
-//          .then(res=>res.json());
+//     const response = await fetch(`${BASE_URL}/books/${bookId}`, options);
+//     const book = await response.json();
+//     return book;
 // }
-
-// deleteBookById(30);
-// fetchBooks();
-// fetchBookById(3);
-
-
-
+// deleteBookById(33);
 // *************************************************************************
 // *************************************************************************
 
