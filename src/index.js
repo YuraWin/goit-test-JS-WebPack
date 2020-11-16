@@ -682,101 +682,104 @@ import './styles.css';
 // }
 
 // deleteBookById(30);
-
-
 // fetchBooks();
-
 // fetchBookById(3);
 
-// **module 13 TRY/CATCH ***********************************************************************
 
 
-// try {
-//     console.log('Код в блоке Try до ошибки')
-//     console.log(myVar);
-//     console.log('Код в блоке Try после ошибки')
+// ***module 13 video async /await **********************************************************************
+
+const BASE_URL = 'http://localhost:3000';
+
+
+// function fetchBookById(id) {
+//     return fetch(`${BASE_URL}/books/${id}`)
+//         .then(r => {
+//             if (r.ok) {
+//             return r.json()
+//             }
+//             throw new Error(r.statusText)
+//         })
+//          .then(result => console.log(result))
 // }
-// catch (error) {
+
+// fetchBookById(112)
+//         .catch(err=>console.log('error',err));
+
+const newBook = {
+    title: 'Снежинки',
+    author: 'Хoменко',
+    genres: ['детектив'],
+    rating: 5,
+};
+
+async function addBook(book) {
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(book),
+    }
+    const response = await fetch(`${BASE_URL}/books/`, options);
+    const newBook = await response.json();
+    return newBook;
+      
     
-//     console.log('Ошибка в коде')
+};
+ 
+// addBook({
+//     title: 'Кулинария шашлык',
+//     author: 'ПИванов',
+//     genres: ['мистика'],
+//     rating: 1,
+// }).then(renderBook);
 
-//     console.dir(error.message);
+// addBook({
+//     title: 'Как стать дуном?',
+//     author: 'Репета',
+//     genres: ['триллер'],
+//     rating: 10,
+// }).then(renderBook);
+
+// function renderBook(book) {
+//     console.log('Пришел ответ можно рисовать  книгу');
+//     console.log(book);
+// }
+
+// function updateBookById(update, bookId) {
     
-// }
-// console.log('Код в конце')
-
-// *************************
-// const validJSON = '{"name":"Манго", "age":35}';
-// const invalidJSON = '{ backend return surprice}';
-
-// try {
-//     console.log('1');
-
-//     console.log(JSON.parse(invalidJSON));
-
-//     console.log('2');
-// }
-// catch (err) {
-//     if (err.name ==='SyntaxError')
-//     console.log('Ошибка парса json надо исправлять что-ли');
-    
-// }
-// console.log('выполняем код дальше');
-
-// **module 13 Async/await**********************************************************
-
-// function getFruit(name) {
-//     const fruits = {
-//         strawberry: 'Клубника',
-//         kiwi: 'Киви',
-//         apple: 'Яблоко',
+//     const options = {
+//     method: 'PATCH',
+//     headers: {
+//         'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(update)
 //     };
-//     return new Promise((resolve,reject) => {
-//         setTimeout(() => reject(fruits[name]), 500)
-//     });
-// }
-// // getFruit('apple').then(fruit => console.log(fruit));
-
-// async function aMakeSmoothie() {
-//     try {
-//         // console.time('aMakeSmoothie')
-//     // const apple = await getFruit('apple');
-//     // console.log(apple);
-
-//     // const kiwi = await getFruit('kiwi');
-//     // console.log(kiwi);
-
-//         const apple = await getFruit('apple');
-        
-//     // const kiwi = getFruit('kiwi');
-//     // const fruits = await Promise.all([apple, kiwi]);
-//     // console.log(fruits);
-
-//     // console.timeEnd('aMakeSmoothie');
-//         return apple;
-//     }
-//     catch (error) {
-//      return  error;
-//     }
-// }
-
-// aMakeSmoothie().then(fruit => console.log(fruit))
-//     .catch(er => console.log('ошибка',er));
-
-
-
-// function makeSmoothie() {
     
-//     getFruit('apple').then(fruit => {
-//         console.log(fruit);
+//     return fetch(`${BASE_URL}/books/${bookId}`, options)
+//         .then(res=>res.json());
+// }
 
-//         getFruit('kiwi').then(fruit => {
-//             console.log(fruit)
-//         });
-//     });
-// };
+// updateBookById({ title: 'Супер пупер книга' },25);
+// updateBookById({ title: 'Балаган' },26);
+// updateBookById({ rating:1,author:'Манго' },27);
 
-// makeSmoothie();
+
+// function deleteBookById(bookId) {
+//     const options = {
+//         method:'DELETE'
+//     }
+//     return fetch(`${BASE_URL}/books/${bookId}`, options)
+//          .then(res=>res.json());
+// }
+
+// deleteBookById(30);
+// fetchBooks();
+// fetchBookById(3);
+
+
+
 // *************************************************************************
-
+// *************************************************************************
 
