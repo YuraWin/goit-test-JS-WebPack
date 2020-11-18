@@ -777,7 +777,7 @@ import './styles.css';
 
 // ***module 13 video async /await **********************************************************************
 
-const BASE_URL = 'http://localhost:3000';
+// const BASE_URL = 'http://localhost:3000';
 
 
 // async function fetchBookById(id) {
